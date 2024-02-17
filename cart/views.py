@@ -89,3 +89,42 @@ def show_session_id(request):
 
 
 
+
+
+
+
+
+def view_cart_count(request):
+    if request.method == 'GET':
+        session_id = request.GET.get('session_id')
+        
+        if not session_id:
+            return JsonResponse({'error': 'Session ID is required'}, status=400)
+
+        carts = ShoppingCart.objects.filter(session_id=session_id)
+
+        if not carts.exists():
+            return JsonResponse({'error': 'Shopping cart not found'}, status=404)
+
+        cart_items = {
+            'items': [],
+            'total_quantity': 0,
+        }
+
+        for cart in carts:
+            # Append product and quantity to cart_items for each cart
+            cart_items['items'].append({
+              
+                'cart_id': cart.id,
+
+            })
+            cart_items['total_quantity'] += cart.quantity
+            
+        return JsonResponse(cart_items, status=200)
+    else:
+        return JsonResponse({'error': 'Only GET requests are allowed'}, status=405)
+
+
+
+
+

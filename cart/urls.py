@@ -7,5 +7,6 @@ urlpatterns = [
     path('api/view_cart/', view_cart, name='view_cart'),
     path('api/delete_cart/', delete_cart, name='delete_cart'),
     path('show-session-id/', show_session_id, name='show_session_id'),
+    path('api/view_cart_count/', view_cart_count, name='view_cart_count'),
 
 ]
