@@ -1,0 +1,1 @@
+gunicorn YanicEcommarce.wsgi:application
